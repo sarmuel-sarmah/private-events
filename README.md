@@ -1,24 +1,16 @@
-# README
+# Private events
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project allows users to create events and manage user signups
 
-Things you may want to cover:
+The project makes use of active record associations and specifically models many-to-many relationships in ways like:
 
-* Ruby version
+* A user can create events.
 
-* System dependencies
+* A user can attend many events.
 
-* Configuration
+* An event will be attended by many users.
 
-* Database creation
+* Events take place at specific date and at a location.
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
 
 * ...
