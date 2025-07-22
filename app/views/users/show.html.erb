@@ -1,11 +1,16 @@
 <h1>User Profile </h1>
 <p>Hi, <%= @user.name %> </p>
 
-<h2>Events created</h2>
+<h2>Events created by this User</h2>
 <ul>
-    <% @events.each do |event| %>
-        <li>
-            <%= link_to event.title, event %>
-        </li>
+    <% if @events.any? %>
+        <% @events.each do |event| %>
+            <li>
+                <%= link_to event.title, event %>
+                <% event.created_at.to_formatted_s(:long) %>
+            </li>
+        <% end %>
+    <% else %>
+        <p><%= @user.name has not created any events yet.%></p>
     <% end %>
 </ul>
