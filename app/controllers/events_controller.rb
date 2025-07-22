@@ -3,4 +3,12 @@ class EventsController < ApplicationController
   def index
     @event = Event.all
   end
+
+  def new
+    @event = current_user.events.new
+  end
+
+  def create
+    @event = current_user.events.build(params[:event])
+  end
 end
