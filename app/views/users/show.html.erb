@@ -1,5 +1,5 @@
 <h1>User Profile </h1>
-<p>Hi, <%= @user.name %> </p>
+<p>Hi, <%= @user.email %> </p>
 
 <h2>Events created by this User</h2>
 <ul>
@@ -11,6 +11,6 @@
             </li>
         <% end %>
     <% else %>
-        <p><%= @user.name has not created any events yet.%></p>
+        <p><%= @user.email %> hasn't created any events yet.</p>
     <% end %>
 </ul>
