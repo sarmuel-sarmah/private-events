@@ -1,15 +1,15 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :authenticate_user!, except: [ :index ]
   def index
     @event = Event.all
   end
 
   def new
-    @event = current_user.events.build
+    @event = current_user.created_events.build
   end
 
   def create
-    @event = current_user.events.build(event_params)
+    @event = current_user.created_events.build(event_params)
 
     if @event.save
       redirect_to @event, notice: "Event was succcessfully created."
