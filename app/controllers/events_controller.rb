@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = current_user.created_events.build
+    @event = Event.new
   end
 
   def create
@@ -26,6 +26,6 @@ class EventsController < ApplicationController
 
   private
   def event_params
-    params.expect(:title, :description, :date)
+    params.expect(:title, :desc, :date)
   end
 end

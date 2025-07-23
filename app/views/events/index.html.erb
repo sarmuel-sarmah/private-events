@@ -7,9 +7,9 @@
     <% if @events.any? %>
         <% @events.each do |event| %>
             <h2><%= link_to event.title, event %></h2>
-            <span>Created by: <%event.creator.email %></span>
+            <span>Created by: <%= event.creator.email %></span>
 
-            <p><%= truncate(event.description, length: 150) %></p>
+            <p><%= truncate(event.desc, length: 150) %></p>
 
             <div>
                 <%= link_to 'View Details', event %>
