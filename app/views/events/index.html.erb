@@ -1,5 +1,27 @@
-<h1>For the love of Events</h1>
-<p>Count me in on the parrty!!!!</p>
+<div>
+    <div>
+        <h1>Upcoming Events</h1>
+        <%= link_to 'Create New Event', new_event_path%>
+    </div>
 
-<%= link_to 'My Profile', user_path(current_user) %>
-<p><%= link_to "Create New Event?", new_event_path %></p>
+    <% if @events.any? %>
+        <% @events.each do |event| %>
+            <h2><%= link_to event.title, event %></h2>
+            <span>Created by: <%event.creator.email %></span>
+
+            <p><%= truncate(event.description, length: 150) %></p>
+
+            <div>
+                <%= link_to 'View Details', event %>
+                <% if user_signed_in? && current_user == event.creator %>
+                    <%= link_to 'Edit', edit_event_path(event) %>
+                <% end %>
+            </div>
+        <% end %>
+    <% else %>
+        <div>
+            <p>No events found.</p>
+            <%= link_to 'Create your first event', new_event_path%>
+        </div>
+    <% end %>
+</div>
