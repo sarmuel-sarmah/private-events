@@ -13,4 +13,9 @@ class EventAttendingsController < ApplicationController
       render :new
     end
   end
+
+  private
+  def attend_params
+    params.expect(:event_id, :user_id)
+  end
 end
