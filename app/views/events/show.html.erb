@@ -11,6 +11,22 @@
         <p><%= @event.desc%></p>
     </div>
 
+    <div class="location">
+        <h3>location</h3>
+        <p><%= @event.location%></p>
+    </div>
+
+    <% if current_user != @event.creator && !@event.attendees.include?(current_user)%>
+        <%= link_to "Attend the event", create_event_attending_path(:user_id => current_user.id, :event_id => event.id), method: :post%>
+    <% else %>
+        <div>You have registered for the event.</div>
+    <% end %>
+
+    <h4>The following users have registered for the event.</h4>
+    <%@event.attendees.each do |attendee| %>
+        <%= @attendee.email %>
+    <% end %>
+
     <% if current_user == @event.creator %>
         <div class="event-action">
             <%= link_to 'Edit Event', edit_event_path(@event), class: 'btn btn-primary' %>
