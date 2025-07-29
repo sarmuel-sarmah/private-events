@@ -2,7 +2,7 @@
     <h1>An Events World</h1>
         <div>
             <% if user_signed_in? %>
-                <p>Hi, <strong><%= current_user.email %></strong>!</p>
+                <p>Hi, <strong><%= current_user.username %></strong>!</p>
                 <%= button_to 'logout', destroy_user_session_path, method: :delete, class: "btn btn-outline-danger" %><br>
                 <%= link_to 'Create New Event', new_event_path%>
             <% else %>
