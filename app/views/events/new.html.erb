@@ -20,9 +20,14 @@
     </div> <br>
 
     <div class="field">
-        <%= form.label :description %>
-        <%= form.text_area :description %>
+        <%= form.label :desc %>
+        <%= form.text_area :desc %>
     </div> <br>
+
+    <div class="field">
+        <%= form.label :location %>
+        <%= form.text_field :location %>
+    </div><br>
 
     <div class="field">
         <%= form.label :date %>
@@ -32,5 +37,4 @@
     <div class="actions">
         <%= form.submit%>
     </div>
-    <p>Created by: <%= @event.creator.email %></p>
 <% end %>
