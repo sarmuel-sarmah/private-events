@@ -4,9 +4,11 @@ class Event < ApplicationRecord
   has_many :attendees, through: :event_attendings, source: :event_attendee
   validates :title, :desc, :date, :location, presence: true
 
+  scope :upcoming, -> { where("date > ?", Time.current) }
+  scope :past, -> { where("date < ?", Time.current) }
+
   class << self
     def upcoming
-      where("date > ?", Time.current)
     end
 
     def past
