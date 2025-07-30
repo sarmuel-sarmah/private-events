@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [ :index ]
-  before_action :set_product, only: %i[ show edit update destroy ]
   def index
     @events = Event.all.order(created_at: :desc)
   end
@@ -38,8 +37,9 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    @event = current_user.created_events.find(params[:id])
     @event.destroy
-    redirect_to events_path
+    redirect_to events_path, notice: "Event has been successfully deleted"
   end
 
   private
