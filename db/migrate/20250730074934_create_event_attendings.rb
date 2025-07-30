@@ -1,8 +1,8 @@
 class CreateEventAttendings < ActiveRecord::Migration[8.0]
   def change
     create_table :event_attendings do |t|
-      t.integer :event_attendee_id
-      t.integer :attended_event_id
+      t.references :event, null: false, foreign_key: true
+      t.references :event_attendee, null: false, foreign_key: { to_table: :users }
 
       t.timestamps
     end
