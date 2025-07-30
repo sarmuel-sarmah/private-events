@@ -16,16 +16,34 @@
 </ul>
 
 
-<h2>Events you have attended!</h2>
-<ul>
-    <% if @attends.any? %>
-        <% @attends.each do |event| %>
+<h2>Event Registrations!</h2>
+<% upcoming_events = @attends.select { |event| event.date.future? } %>
+<% past_events = @attends.select { |event| event.date.past? } %>
+
+<% if upcoming_events.any? %>
+    <h3>Upcoming events</h3>
+    <ul>
+        <% upcoming_events.each do |event| %>
             <li>
                 <%= link_to event.title, event %>
-                <% event.created_at.to_formatted_s(:long) %>
+                <%= event.date.to_formatted_s(:long) %>
             </li><br>
         <% end %>
-    <% else %>
-        <p>@<%= @user.username %> hasn't attended any events yet!</p>
-    <% end %>
-</ul>
+    </ul>
+<% end %>
+
+<% if past_events.any? %>
+    <h3>Past events</h3>
+    <ul>
+        <% past_events.each do |event| %>
+            <li>
+                <%= link_to event.title, event %>
+                <%= event.date.to_formatted_s(:long) %>
+            </li><br>
+        <% end %>
+    </ul>
+<% end %>
+
+<% if upcoming_events.empty? && past_events.empty? %>
+    <p>@<%= @user.username%> hasn't attended any events yet!</p>
+<% end %>
