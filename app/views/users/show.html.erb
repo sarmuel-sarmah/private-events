@@ -11,7 +11,7 @@
             </li>
         <% end %>
     <% else %>
-        <p><%= @user.email %> hasn't created any events yet.</p>
+        <p>@<%= @user.username %> hasn't created any events yet.</p>
     <% end %>
 </ul>
 
@@ -23,9 +23,9 @@
             <li>
                 <%= link_to event.title, event %>
                 <% event.created_at.to_formatted_s(:long) %>
-            </li>
+            </li><br>
         <% end %>
     <% else %>
-        <p><%= @user.email %> hasn't attended any events yet!</p>
+        <p>@<%= @user.username %> hasn't attended any events yet!</p>
     <% end %>
 </ul>
