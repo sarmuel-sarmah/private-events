@@ -23,6 +23,19 @@ class EventsController < ApplicationController
     @event = Event.includes(:attendees).find(params[:id])
   end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = currrent_user.created_events.find(params[:id])
+    if @event.update(event_params)
+      redirect_to @event, notice: "Event details have been updated!"
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
   def event_params
     params.expect(event: [ :title, :desc, :date, :location ])
