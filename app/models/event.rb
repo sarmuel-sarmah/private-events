@@ -6,13 +6,4 @@ class Event < ApplicationRecord
 
   scope :upcoming, -> { where("date > ?", Time.current) }
   scope :past, -> { where("date < ?", Time.current) }
-
-  class << self
-    def upcoming
-    end
-
-    def past
-      where("date < ?", Time.current)
-    end
-  end
 end
