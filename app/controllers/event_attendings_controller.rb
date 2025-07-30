@@ -4,18 +4,12 @@ class EventAttendingsController < ApplicationController
   end
 
   def create
-    @attendee = current_user.attended_event.build(attend_params)
+    @attendee = EventAttending.new(event_attendee_id: params[:event_id], attended_event_id: params[:user_id])
 
     if @attendee.save
-      redirect_to @attendee, notice: "You have successfully registered for the event!"
+      redirect_to event_path(@attendee.attended_event_id), notice: "You have successfully registered for the event!"
     else
-      flash.now[:error] = "Unable to register for the event"
-      render :new
+      redirect_back fallback_location: events_path, alert: "Unable to register for the event"
     end
-  end
-
-  private
-  def attend_params
-    params.expect(:event_id, :user_id)
   end
 end
