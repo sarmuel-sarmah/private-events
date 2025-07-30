@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, except: [ :index ]
+  before_action :set_product, only: %i[ show edit update destroy ]
   def index
     @events = Event.all.order(created_at: :desc)
   end
@@ -34,6 +35,11 @@ class EventsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @event.destroy
+    redirect_to events_path
   end
 
   private
