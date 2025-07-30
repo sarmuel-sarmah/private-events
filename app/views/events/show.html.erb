@@ -45,10 +45,17 @@
 
     <% if current_user == @event.creator %>
         <div class="event-action">
-            <%= link_to 'Edit Event', edit_event_path(@event), class: 'btn btn-primary' %>
+            <div><%= link_to 'Edit Event', edit_event_path(@event), class: 'btn btn-primary' %></div> <br>
             <%= button_to 'Delete Event', @event, method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
     <% end %><br>
+
+    <div>
+        <% event_attending = EventAttending.find_by(event_id: @event.id, event_attendee_id: current_user.id) %>
+        <% if event_attending %>
+            <%= button_to "Deregister", event_attending_path(event_attending), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+    </div><br>
 
     <%= link_to 'Back to Events', events_path, class: 'btn btn-secondary'%>
 </div>

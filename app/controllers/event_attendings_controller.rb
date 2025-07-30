@@ -13,6 +13,13 @@ class EventAttendingsController < ApplicationController
     end
   end
 
+  def destroy
+    event_attending = EventAttending.find(params[:id])
+    event = event_attending.event
+    event_attending.destroy
+    redirect_to event_path(event), notice: "You have deregistered from the event!"
+  end
+
   private
 
   def event_attending_params
